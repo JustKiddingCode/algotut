@@ -93,9 +93,10 @@
 Über mich
 \begin{itemize}
  \item Konstantin Zangerle
+ \item info@konstantinzangerle.de
  \item 4. Semester
  \item Vorher Programmieren Tutor, jetzt Algo
- \item Source auf Github (?)
+ \item Source auf Github
  \item Kein Ersatz für VL
 \end{itemize}
 
@@ -131,10 +132,31 @@
 \end{frame}
 
 \section{Binäre Suche}
+\begin{frame}
+ \begin{itemize}
+  \item Wie schnell kann ich in Daten suchen?
+  \item Arbeitsauftrag: Entwickle einen Algorithmus, der in einem Array nach einem Element sucht.
+ \end{itemize}
+
+\end{frame}
+
 \begin{frame}[fragile]{Binäre Suche}
  \begin{algorithmic}
-  \Function{Binary Search}{Sorted Array of Element a, Element k}
-  
+  \Function{Binary Search}{Sorted Array [1..n] of Number a, Number k}
+    \State start = 1
+    \State ende = n
+    \State middle = 1
+    \While{start $\neq$ ende}
+      \State middle $\gets\lfloor \frac{start + ende}{2} \rfloor$
+      \If {$a[middle] > k$}
+	\State start $\gets$ middle
+      \ElsIf{$a[middle] < k$}
+        \State end $\gets$ middle
+      \Else
+        \State \Return middle
+      \EndIf
+    \EndWhile
+    \State \Return a[start] == k ? start : -1
   \EndFunction
  \end{algorithmic}
 \end{frame}
