@@ -122,7 +122,14 @@
 
 \subsection{Klausur}
 \begin{frame}{Klausur}
- 
+ Am Ende des Semesters. \\
+ Übungspunkte:
+ \begin{itemize}
+  \item 25\% - 1 Punkt
+  \item 50\% - 2 Punkte
+  \item 75\% - 3 Punkte
+ \end{itemize}
+
 \end{frame}
 
 
@@ -159,6 +166,48 @@
     \State \Return a[start] == k ? start : -1
   \EndFunction
  \end{algorithmic}
+\end{frame}
+
+\begin{frame}{Korrektheit}
+ Beweise, dass der Algorithmus das richtige Ergebnis liefert. \pause
+\end{frame}
+
+\begin{frame}{Geschwindigkeit}
+ Zeige, dass der Algorithmus im schlechtesten Fall in $\mathcal O(log n)$ liegt.
+\end{frame}
+
+\section{Mehr Algorithmen}
+
+\begin{frame}[fragile]
+\begin{algorithmic}
+ \Function {blub}{A,B,l,m,n}
+  \State C = zeroes(l,n) 
+  \For i = 1 to l
+    \For k = 1 to n 
+      \For j = 1 to m
+        \State $C(i,k) = C(i,k) + A(i,j) \cdot B(j,k) $
+      \EndFor 
+    \EndFor
+  \EndFor
+  \State \Return C
+\EndFunction
+\end{algorithmic}
+\end{frame}
+\begin{frame}[fragile]{Matrizenmultiplikation}
+\begin{algorithmic}
+ \Function {Matrizenmultiplikation}{A,B,l,m,n}
+  \State C = zeroes(l,n) \Comment{Ergebnismatrix C mit Nullen initialisieren}
+  \For i = 1 to l \Comment{über Zeilen von C}
+    \For k = 1 to n \Comment{über Spalten von C}
+      \For j = 1 to m \Comment {über Spalten von A / Zeilen B}
+        \State $C(i,k) = C(i,k) + A(i,j) \cdot B(j,k) $
+      \EndFor 
+    \EndFor
+  \EndFor
+  \State \Return C
+\EndFunction
+\end{algorithmic}
+in $\mathcal O(n^3)$
 \end{frame}
 
 \end{document}
