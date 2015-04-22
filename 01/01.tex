@@ -156,9 +156,9 @@
     \While{start $\neq$ ende}
       \State middle $\gets\lfloor \frac{start + ende}{2} \rfloor$
       \If {$a[middle] > k$}
-	\State start $\gets$ middle
+	\State end $\gets$ middle
       \ElsIf{$a[middle] < k$}
-        \State end $\gets$ middle
+        \State start $\gets$ middle
       \Else
         \State \Return middle
       \EndIf
