@@ -186,10 +186,10 @@ Zeitverbrauch hat.
     \end{algorithmic}
 \end{frame}
 \begin{frame}{Musterlösung - Laufzeit}
-\textbf{Laufzeit: } Jeder Aufruf der Schleife in Zeile 6 benötigt konstant viel Zeit. Da die Schleife von $1$ bis $n$ läuft ist daher die Laufzeit offensichtlich $\Theta(n)$.\\ 
+\textbf{Laufzeit: } Jeder Aufruf der Schleife benötigt konstant viel Zeit. Da die Schleife von $1$ bis $n$ läuft ist daher die Laufzeit offensichtlich $\Theta(n)$.\\ 
 \end{frame}
 
-\begin{frame}{Musterlösung - Korrektheit (Z. 13)}
+\begin{frame}{Musterlösung - Korrektheit (Z. 12)}
 \begin{itemize}
  \item Induktionsanfang $i=1$: Es wird genau eins der Arrays ausgewählt. Danach wird vom ausgewählten Array der Pointer um eins erhöht. D.h. im Fall $A[j_A] < B[j_B]$ wird $j_A$ zu 2 und $j_B$ bleibt 1. Dann gilt Behauptung. Der andere Fall geht analog.
  \item Induktionsvoraussetzung: $C[1..i-1]$ enthält genau $A[1..j_A-1], B[1..j_B-1]$ 
@@ -197,7 +197,7 @@ Zeitverbrauch hat.
 \end{itemize}	
 \end{frame}
 
-\begin{frame}{Musterlösung - Korrektheit (Z. 14)}
+\begin{frame}{Musterlösung - Korrektheit (Z. 13)}
 \begin{itemize}
  \item Induktionsanfang $i=1$: zu dem Zeitpunkt befindet sich nur ein Elementi $C[1]$ im Array $C$. Wegen Zeile 8 ist $C[1] = \min(A[1],B[1])$. Im Fall $C[1] = A[1]$ wird $j_A$ um eins erhöht und es gilt offensichtlich $A[1] \leq B[1]$. Die Behauptung gilt also. Der andere Fall geht analog.
  \item Induktionsvoraussetzung: Die Invariante ist zum Zeitpunkt $i-1$ erfüllt. D.h. $B[k] \leq A[j_A] \quad  \forall k \in \{1..j_B-1\}$, $A[k] \leq B[j_B]\quad  \forall k \in \{1..j_A-1\}$
@@ -209,7 +209,7 @@ Zeitverbrauch hat.
         
 	
 \end{frame}
-\begin{frame}{Invariante in  Zeile 15}
+\begin{frame}{Invariante in  Zeile 14}
 \begin{itemize}
  \item Induktionsanfang $i=1$: zu dem Zeitpunkt befindet sich nur ein Element im Array $C$. Also ist $C$ sortiert. \\
  \item Induktionsvoraussetzung: Die Invariante ist zum Zeitpunkt $i-1$ erfüllt. D.h. $C[1..i-1]$ ist sortiert.\\
