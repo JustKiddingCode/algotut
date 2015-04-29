@@ -22,7 +22,7 @@
 \usepackage{algpseudocode}
  \newcommand{\real}{\mathbb{R}}
  \newcommand{\nat}{\mathbb{N}}
- \newcommand{\Oh}{\mathrm{O}}
+ \newcommand{\Oh}{\mathcal{O}}
  \newcommand{\oh}{\mathrm{o}}
  \newcommand{\SP}{\mathrm{SP}}
 
@@ -52,7 +52,7 @@
 % the presentation starts here
 
 \title[Algo I Tut]{2. Algorithmen Tutorium I}
-\subtitle{TODO: INSERT}
+\subtitle{Rechnen im O-Kalkül}
 \author[Zangerle]{Konstantin Zangerle}
 
 \institute{Institut für Theoretische Informatik}
@@ -97,10 +97,16 @@
 \end{frame}
 
 \section{O Kalkül}
-\begin{frame}{O Kalkül}
+\begin{frame}{Limes Definitionen O-Kalkül}
+ $f \in \Oh(g) \iff \limsup_{x \to \infty}| \frac{f(x)}{g(x)}| < \infty$ \\
+ $f \in \Theta(g) \iff 0 < \liminf_{x \to \infty} | \frac{f(x)}{g(x)} |< \limsup_{x \to \infty} |\frac{f(x)}{g(x)} |< \infty$ \\
+ $f \in \Omega(g) \iff \liminf_{x \to \infty} \frac{f(x)}{g(x)} > 0$ \\
+\end{frame}
+
+\begin{frame}{Aussagen im O Kalkül}
 Beweist/widerlegt verschiedene Aussagen im O-Kalkül.
   \begin{itemize}
-    \item $f(n) + g(n) = \O({\max(f(n),g(n))})$
+    \item $f(n) + g(n) = \Oh({\max(f(n),g(n))})$
     \item Auf der Menge der asymptotisch positiven Funktionen ist 
       $$f \sim_{\Theta} g \quad:\Longleftrightarrow\quad f \in \Theta(g)$$
       eine Äquivalenzrelation.
