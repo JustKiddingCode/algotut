@@ -13,6 +13,7 @@
 \documentclass[18pt]{beamer}
 %% SLIDE FORMAT
 \usepackage[utf8]{inputenc}
+\usepackage{enumitem}
 % use 'beamerthemekit' for standard 4:3 ratio
 % for widescreen slides (16:9), use 'beamerthemekitwide'
 
@@ -43,6 +44,8 @@
 
 \usepackage{biolinum}
 
+
+
 %% TikZ INTEGRATION
 
 % use these packages for PCM symbols and UML classes
@@ -52,7 +55,7 @@
 % the presentation starts here
 
 \title[Algo I Tut]{3. Algorithmen Tutorium I}
-\subtitle{Rechnen im O-Kalkül}
+\subtitle{Datenstrukturen}
 \author[Zangerle]{Konstantin Zangerle}
 
 \institute{Institut für Theoretische Informatik}
@@ -126,11 +129,46 @@ Einfacher als gedacht: \pause
 Eine Speicherallokation beliebiger Größe soll in $\Oh(1)$ funktionieren.
 \end{frame}
 
+\begin{frame}{Eine Datenstruktur für...}
+ Entwickle eine Datenstruktur, die folgende Eigenschaften hat:
+ \begin{itemize}
+  \item pushBack und popBack in $\Oh(\log n)$ im Worst-Case nicht nur amortisiert.
+  \item Zugriff auf das k-te Element in $\Oh(1)$ im Worst-Case nicht nur amortisiert.
+ \end{itemize}
+Eine Speicherallokation beliebiger Größe soll in $\Oh(1)$ funktionieren.
+\end{frame}
+
+\begin{frame}{Master Theorem}
+ Zeigen Sie mit Hilfe des Master-Theorems scharfe asymptotische Schranken für folgende Rekurrenzen:
+ 
+ \begin{enumerate}[label=\alph* )]
+  \item $A(1) := 1$ und für $n = 2^k, k \in \mathbb{N}, A(n) = \sqrt{2} A(n/2) + \hat{c}^2 n$
+  \item $B(1) := 4$ und für $n = 4^k, k \in \mathbb{N}, B(n) = 4B(n/4) + 4n$
+  \item $C(1) := 3$ und für $n = 2^k, k \in \mathbb{N}, C(n) = 8C(n/2) + n$
+  \item $D(1) := 2$ und für $n = 5^k, k \in \mathbb{N}, D(n) = 3(D(n/5)+2n + 1) + 3$
+ \end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Arrays}
+ Gegeben sei ein Array $A = A[1], \ldots, A[n]$ mit n Zahlen in beliebiger Reihenfolge.
+ Für eine gegebene Zahl x soll ein Paar $(A[i], A[j]), 1 \leq i, j \leq n$ gefunden werden,
+ für gilt: $A[i] + A[j] = x$.
+ 
+ \begin{enumerate}[label=\alph*)]
+  \item Geben Sie eine Lösung für x = 33, und A = (7,15,21,14,18,3,9) an.
+  \item Geben Sie einen effizienten Algorithmus an, der das Problem in erwarteter Zeit $\Oh(n)$
+  löst, und bei Erfolg ein Paar (A[i], A[j]) ausgibt, ansonsten NIL.
+ \end{enumerate}
+
+\end{frame}
+
 
 \begin{frame}
 \includegraphics[scale=0.5]{tree} \\
 License: http://creativecommons.org/licenses/by-nc/2.5/ \\
 by xkcd.com/835
 \end{frame}
+
 
 \end{document}
