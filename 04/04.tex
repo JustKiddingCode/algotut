@@ -54,7 +54,7 @@
 
 % the presentation starts here
 
-\title[Algo I Tut]{3. Algorithmen Tutorium I}
+\title[Algo I Tut]{4. Algorithmen Tutorium I}
 \subtitle{Datenstrukturen}
 \author[Zangerle]{Konstantin Zangerle}
 
@@ -95,6 +95,7 @@
  \tableofcontents
 \end{frame}
 
+
 \section{Besprechung der Übungsaufgaben}
 \begin{frame}{Übungsblatt 2}
 Häufige Fehler
@@ -112,9 +113,37 @@ Häufige Fehler
 
 \end{frame}
 
+\section{Wahrscheinlichkeitstheorie}
+
+
+\section{SparseArray}
+\begin{frame}{SparseArray}
+\begin{itemize}
+ \item 	Entwerfe ein \textit{SparseArray} 
+ \item 	Datenstruktur mit den Eigenschaften eines beschränkten Arrays, 
+  \begin{itemize}
+   \item + schnelle Erzeugung
+   \item + schneller Reset
+  \end{itemize}
+ \item \textbf{allocate} liefert \emph{uninitialisierten} Speicher in konstanter Zeit.
+	\begin{itemize}
+	\item $n$ Slots braucht $\Oh(n)$ Speicher.
+	\item leeren \textit{SparseArray} mit $n$ Slots braucht $\Oh(1)$ Zeit. 
+	\item unterstützt eine Operation
+	\begin{itemize}
+	 \item \textit{reset}, in $\Oh(1)$ Zeit in leeren Zustand.
+	 \item $\mathit{get}(i)$ und $\mathit{set}(i,x)$ mit wahlfreien Zugriff
+	\end{itemize}
+	\item $i$-te liefert zunächst $A.\mathit{get}(i)$ einen speziellen Wert $\bot$.
+	\end{itemize}
+\end{itemize}
+ 
+\end{frame}
+
+
 
 \begin{frame}
-\includegraphics[scale=0.5]{correlation} \\
+\includegraphics[scale=0.7]{correlation} \\
 License: http://creativecommons.org/licenses/by-nc/2.5/ \\
 by xkcd.com/552
 \end{frame}
