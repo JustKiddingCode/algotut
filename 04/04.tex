@@ -56,13 +56,20 @@
 \end{filecontents}
 
 \begin{filecontents}{data2.dat}
- 7 1
- 12 1
- 12.5 2
- 14 2
- 18 4
+8.5 1
+12.5 2
+13 2
+14.5 1
+15.5 4
 \end{filecontents}
 
+\begin{filecontents}{data3.dat}
+ 22.5 2
+ 20.5 2
+ 16 2
+ 12.5 1
+ 6.5 2
+\end{filecontents}
 
 
 %% TikZ INTEGRATION
@@ -141,7 +148,11 @@ Häufige Fehler
 \begin{itemize}
  \item ?
 \end{itemize}
-
+  \begin{tikzpicture}[scale=0.5]
+ \begin{axis}
+  \addplot plot file{data3.dat};
+ \end{axis}
+\end{tikzpicture}
 \end{frame}
 
 \section{Wahrscheinlichkeitstheorie}
@@ -157,6 +168,31 @@ Häufige Fehler
   \item Erwartungswert \pause $E[X_0] = \sum_{y \in \Omega} p_y X(y)$
  \end{itemize}
 
+\end{frame}
+
+\begin{frame}{Bälle und Urnen}
+ \begin{tabular}{lll}
+  --- 				&	mit Zurücklegen 	& ohne Zurücklegen 	\\
+ mit Beachtung d. Reihenfolge  	& 	$n^k$			& $\frac{n!}{(n-k)!}$	\\
+ ohne Beachtung d .Reihenfolge 	& 	$\binom{n+k-1}{n-1}$	& $\binom{n}{k}$
+ \end{tabular}
+
+\end{frame}
+
+\begin{frame}{Aufgaben}
+ Ein volles Tutorium bestimmt aus seinen 15 Algorithmen seine Top 6. Wie viele Möglichkeiten dafür gibt es?
+ \pause
+ Ziehe 6 aus 15 ohne Zurücklegen, beachte die Reihenfolge
+ $$ \frac{n!}{(n-k)!} = \frac{15!}{9!} = 3 603 600$$
+\end{frame}
+
+\begin{frame}{Weitere Aufgabe}
+ 3 interessante und 5 langweilige Module sollen auf 8 Semester aufgeteilt werden, also jedes Semester ein Modul. 
+ Wie viele Möglichkeiten gibt es diese zu verteilen, wenn die interessanten und langweiligen Module untereinander 
+ nicht unterscheidbar sind?
+ \pause
+ Ziehe zunächst für die interessanten eine Zahl, danach für die langweiligen.
+ $$ \binom{8}{3} \binom{5}{5} = \frac{8!}{3! 5!} = 56$$
 \end{frame}
 
 
@@ -184,6 +220,28 @@ Häufige Fehler
  
 \end{frame}
 
+\begin{frame}{Lösung}
+ \begin{itemize}
+  \item Nutze zwei Arrays: D für Nutzdaten, H für Indizes.
+  \item In D zusätzlich jeweils eine nicht-negative ganze Zahl
+  \item Zähler, inital auf 0. \pause
+  \item $\mathit{set}(i,x)$
+    \begin{itemize}
+     \item $D[i].\mathit{daten}:=x$, 
+     \item $D[i].\mathit{zahl}:=c$ 
+     \item $H[c]:=i$.
+     \item Danach wird $c$ um eins erhöht.
+    \end{itemize}
+  \item $\mathit{get}(i)$
+    \begin{itemize}
+     \item Wurde $i$-te Slot gesetzt?
+     \item $D[i].\mathit{zahl} < c$
+     \item $H[D[i].\mathit{zahl}] = i$
+    \end{itemize}
+  \item \textit{reset}: Setzte $c=0$
+ \end{itemize}
+
+\end{frame}
 
 
 
