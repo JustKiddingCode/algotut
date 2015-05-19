@@ -21,6 +21,12 @@
 \usepackage{wrapfig}
 \usepackage{hyperref}
 \usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+
+\epstopdfDeclareGraphicsRule{.gif}{png}{.png}{convert gif:#1 png:\OutputFile}
+\AppendGraphicsExtensions{.gif}
+
  \newcommand{\real}{\mathbb{R}}
  \newcommand{\nat}{\mathbb{N}}
  \newcommand{\Oh}{\mathcal{O}}
@@ -121,20 +127,6 @@ Häufige Fehler
 \end{tikzpicture}
 \end{frame}
 
-\section{Wahrscheinlichkeitstheorie}
-\begin{frame}{Wahrscheinlichkeitstheorie für den Hausgebrauch}
- \begin{itemize}
-  \item Ergebnisraum
-  \item Elementarereignisse
-  \item Ereignisse
-  \item $\sum_x p_x = \pause 1$
-  \item Gleichverteilung
-  \item Zufallsvariable
-  \item 0-1-Indikator
-  \item Erwartungswert \pause $E[X_0] = \sum_{y \in \Omega} p_y X(y)$
- \end{itemize}
-
-\end{frame}
 
 \begin{frame}{Bälle und Urnen}
  \begin{tabular}{lll}
@@ -145,12 +137,38 @@ Häufige Fehler
 
 \end{frame}
 
+\section{Sortieralgorithmen}
+\begin{frame}[fragile]{Übersicht Sortieralgorithmen}
+ \begin{itemize}
+  \item Mergesort
+  \item Insertionsort
+  \item Selectionsort
+  \item Quicksort
+  \item Heapsort
+  \item \verb|http://www.sorting-algorithms.com/|
+ \end{itemize}
 
+\end{frame}
 
+\subsection{Mergesort}
 \begin{frame}
-%\includegraphics[scale=0.7]{correlation} \\
-License: http://creativecommons.org/licenses/by-nc/2.5/ \\
-by xkcd.com/552
+ \includegraphics{MergeSort}
+\end{frame}
+
+\subsection{Insertionsort}
+\begin{frame}
+ \includegraphics{InsertionSort}
+\end{frame}
+
+\subsection{Selectionsort}
+\begin{frame}
+ \includegraphics{SelectionSort}
+\end{frame}
+
+\subsection{Quicksort}
+\begin{frame}[fragile]
+Play...
+\verb|Sorting_quicksort_anim.gif|
 \end{frame}
 
 
