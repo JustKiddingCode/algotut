@@ -152,22 +152,65 @@ Häufige Fehler
 
 \subsection{Mergesort}
 \begin{frame}{Mergesort}
- \includegraphics{MergeSort}
 \end{frame}
 
 \subsection{Insertionsort}
 \begin{frame}{Insertionsort}
- \includegraphics{InsertionSort}
 \end{frame}
 
 \subsection{Quicksort}
-\begin{frame}[fragile]{Quicksort}
+\begin{frame}[fragile]{Quicksort - qSortTernary}
+\begin{algorithmic}
+ \Procedure{qSortTernary}{a : Array of Element; l, r : $\mathbb{N}$}
+  \If{$l \leq r$} \Return \EndIf
+  \State $p \gets $ \Call{key}{a[pickPivotPos(a, l,r)]}
+  \State $(m,m') \gets $ \Call{partitionTernary}{a,l,r,p}
+  \State \Call{qSortTernary}{a,l,m-1}
+  \State \Call{qSortTernary}{a,m'+1, r}
+ \EndProcedure
+\end{algorithmic}
+
+\end{frame}
+
+\begin{frame}[fragile]{Quicksort - partitionTernary}
+\small
+\begin{algorithmic}
+ \Function{partitionTernary}{a : Array of Element; l, r : $\mathbb{N}$, p : Key}
+  \State $i \gets l$, $j \gets l$, $k \gets r$
+  \State \Comment \begin{tabular}{|l|l|l|l|}
+	  \hline
+	  l & i & j & r \\	  \hline
+           \textless p & \textgreater  p & ? & =p \\
+           \hline
+         \end{tabular}
+  \While{$j \leq k$}
+    \If{a[j] = p} \Call{swap}{a[j],a[k]}, $k--$
+    \ElsIf{a[j] \textless p} \Call{swap}{a[j],a[i]}, i++, j++
+    \Else \text{ } $j++$
+    \EndIf
+  \EndWhile
+  \State \Comment \begin{tabular}{|l|l|l|}
+	  \hline
+	  l & i  & r \\	  \hline
+           \textless p & \textgreater  p & =p \\
+           \hline
+         \end{tabular}
+    \If {$r-k \leq k -i + 1$} \Call{swap}{a[i..i+(r-k)-1],a[k+1..r]}
+    \Else \text{ } \Call{swap}{a[i..k], a[r-(k-i)..r]}
+    \EndIf
+      \State \Comment \begin{tabular}{|l|l|l|}
+	  \hline
+	  l & i  & r \\	  \hline
+           \textless p & =p & \textgreater  p \\
+           \hline
+         \end{tabular}
+ \EndFunction
+\end{algorithmic}
 
 \end{frame}
 
 \subsection{Bucketsort}
 
 
-\end{frame}
 
 \end{document}
