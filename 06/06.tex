@@ -151,7 +151,21 @@ Häufige Fehler
 \end{frame}
 
 \subsection{Mergesort}
-\begin{frame}{Mergesort}
+\begin{frame}[fragile]{Mergesort}
+\begin{algorithmic}
+ \Function{mergeSort}{a[1..n]}
+   \If{$n=1$} \Return {a[1]} 
+    \Else
+      \State \Return merge(
+      \Call{mergeSort}{a[$1..\lfloor n/2 \rfloor$]},
+      \Call{mergeSort}{a[$\lfloor n/2 \rfloor$+1..n]}
+      )
+   \EndIf
+  
+   
+ \EndFunction
+\end{algorithmic}
+
 \end{frame}
 
 \subsection{Insertionsort}
