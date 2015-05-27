@@ -112,31 +112,6 @@ X	Y
  \tableofcontents
 \end{frame}
 
-
-\section{Besprechung der Übungsaufgaben}
-\begin{frame}{Übungblatt 3}
-Häufige Fehler
-\begin{itemize}
- \item Aufgabe 1) nur für n Zweierpotenz.
- \item Aufgabe 3) Geometrische Reihe für i = 0 
-\end{itemize}
-  \begin{tikzpicture}[scale=0.5]
- \begin{axis}[scaled x ticks={real:23}]
-  \addplot table {\blattIV};
- \end{axis}
-\end{tikzpicture}
-\end{frame}
-
-
-\begin{frame}{Bälle und Urnen}
- \begin{tabular}{lll}
-  --- 				&	mit Zurücklegen 	& ohne Zurücklegen 	\\
- mit Beachtung d. Reihenfolge  	& 	$n^k$			& $\frac{n!}{(n-k)!}$	\\
- ohne Beachtung d .Reihenfolge 	& 	$\binom{n+k-1}{n-1}$	& $\binom{n}{k}$
- \end{tabular}
-
-\end{frame}
-
 \section{Sortieralgorithmen}
 \begin{frame}[fragile]{Übersicht Sortieralgorithmen}
  \begin{itemize}
@@ -168,8 +143,26 @@ Häufige Fehler
 
 \end{frame}
 
-\subsection{Insertionsort}
-\begin{frame}{Insertionsort}
+\subsection{Selectionsort}
+\begin{frame}[fragile]{Selectionsort}
+\begin{algorithmic}
+ \Procedure{SelectionSort}{A}
+ \State $n \gets |A|$
+ \State left $\gets$ 0
+ \Repeat
+   \State $min \gets left$
+   \For{i $\gets$ left + 1 to n}
+    \If{$A[i] < A[min]$}
+      \State $min \gets i$
+    \EndIf
+   \EndFor
+   \State \Call{swap}{A[min], A[links]}
+   \State $links = links + 1$
+ \Until{$left < n$}
+ \EndProcedure
+\end{algorithmic}
+
+
 \end{frame}
 
 \subsection{Quicksort}
@@ -224,7 +217,32 @@ Häufige Fehler
 \end{frame}
 
 \subsection{Bucketsort}
+\begin{frame}[fragile]{Bucketsort}
+ \begin{algorithmic}
+  \Procedure{KSort}{s : Sequence of Element}
+    \State b : Array [O..K-1] of Sequence of Element
+    \ForAll{$e \in s$}
+      \State b[key(e)].pushBack(e)
+    \EndFor
+    \State s $\gets$ concatenation of b[0], \ldots, b[K-1]
+  \EndProcedure
+ \end{algorithmic}
 
+\end{frame}
+
+\section{Aufgaben}
+
+\begin{frame}{Aufgaben}
+\begin{itemize}
+ \item Sortiere $A = [1,5,2,7,9,2,34]$ mittles Bucketsort, Quick3, Mergesort, Insertionsort.
+ \item Analysiere den Speicherverbrauch.
+\end{itemize}
+\end{frame}
+
+\section{Sound of Sorting}
+\begin{frame}{Sound of Sorting}
+ 
+\end{frame}
 
 
 \end{document}
