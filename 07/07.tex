@@ -1,0 +1,196 @@
+%% LaTeX-Beamer template for KIT design
+%% by Erik Burger, Christian Hammer
+%% title picture by Klaus Krogmann
+%%
+%% version 2.1
+%%
+%% mostly compatible to KIT corporate design v2.0
+%% http://intranet.kit.edu/gestaltungsrichtlinien.php
+%%
+%% Problems, bugs and comments to
+%% burger@kit.edu
+
+\documentclass[18pt]{beamer}
+%% SLIDE FORMAT
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+% use 'beamerthemekit' for standard 4:3 ratio
+% for widescreen slides (16:9), use 'beamerthemekitwide'
+
+%\usepackage{templates/beamerthemekit}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage[noend]{algpseudocode}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+
+\epstopdfDeclareGraphicsRule{.gif}{png}{.png}{convert gif:#1 png:\OutputFile}
+\AppendGraphicsExtensions{.gif}
+
+ \newcommand{\real}{\mathbb{R}}
+ \newcommand{\nat}{\mathbb{N}}
+ \newcommand{\Oh}{\mathcal{O}}
+ \newcommand{\oh}{\mathrm{o}}
+ \newcommand{\SP}{\mathrm{SP}}
+
+% \usepackage{templates/beamerthemekitwide}
+
+%\usepackage{epigraph}
+
+% for quotes
+
+\AtBeginSection[] % Do nothing for \section*
+{
+\begin{frame}<beamer>
+\frametitle{Gliederung}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+
+\usepackage{biolinum}
+
+\usepackage{pgfplots}
+
+%% TikZ INTEGRATION
+
+% use these packages for PCM symbols and UML classes
+% \usepackage{templates/tikzkit}
+% \usepackage{templates/tikzuml}
+
+% the presentation starts here
+
+\title[Algo I Tut]{7. Algorithmen Tutorium I}
+\subtitle{Sortieralgorithmen - Intensiv} % TODO
+\author[Zangerle]{Konstantin Zangerle}
+
+\institute{Institut für Theoretische Informatik}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+}
+
+% Bibliography
+
+\begin{document}
+% change the following line to "ngerman" for German style date and logos
+%\selectlanguage{ngerman}
+
+%title page
+\begin{frame}
+\titlepage
+\end{frame}
+
+%table of contents
+\begin{frame}{Gliederung}
+ \tableofcontents
+\end{frame}
+
+
+\section{Besprechung der Übungsaufgaben}
+
+\section{Sortieralgorithmen}
+\begin{frame}[fragile]{Übersicht Sortieralgorithmen}
+ \begin{itemize}
+  \item Mergesort
+  \item Insertionsort
+  \item Selectionsort
+  \item Quicksort
+  \item Heapsort
+  \item \verb|http://www.sorting-algorithms.com/|
+ \end{itemize}
+
+\end{frame}
+
+\subsection{Mergesort}
+\begin{frame}[fragile]{Mergesort}
+\begin{algorithmic}
+ \Function{mergeSort}{a[1..n]}
+   \If{$n=1$} \Return {a[1]} 
+    \Else
+      \State \Return merge(
+      \Call{mergeSort}{a[$1..\lfloor n/2 \rfloor$]},
+      \Call{mergeSort}{a[$\lfloor n/2 \rfloor$+1..n]}
+      )
+   \EndIf
+  
+   
+ \EndFunction
+\end{algorithmic}
+
+\end{frame}
+
+\subsection{Insertionsort}
+\begin{frame}{Insertionsort}
+\end{frame}
+
+\subsection{Quicksort}
+\begin{frame}[fragile]{Quicksort - qSortTernary}
+\begin{algorithmic}
+ \Procedure{qSortTernary}{a : Array of Element; l, r : $\mathbb{N}$}
+  \If{$l \leq r$} \Return \EndIf
+  \State $p \gets $ \Call{key}{a[pickPivotPos(a, l,r)]}
+  \State $(m,m') \gets $ \Call{partitionTernary}{a,l,r,p}
+  \State \Call{qSortTernary}{a,l,m-1}
+  \State \Call{qSortTernary}{a,m'+1, r}
+ \EndProcedure
+\end{algorithmic}
+
+\end{frame}
+
+\begin{frame}[fragile]{Quicksort - partitionTernary}
+\small
+\begin{algorithmic}
+ \Function{partitionTernary}{a : Array of Element; l, r : $\mathbb{N}$, p : Key}
+  \State $i \gets l$, $j \gets l$, $k \gets r$
+  \State \Comment \begin{tabular}{|l|l|l|l|}
+	  \hline
+	  l & i & j & r \\	  \hline
+           \textless p & \textgreater  p & ? & =p \\
+           \hline
+         \end{tabular}
+  \While{$j \leq k$}
+    \If{a[j] = p} \Call{swap}{a[j],a[k]}, $k--$
+    \ElsIf{a[j] \textless p} \Call{swap}{a[j],a[i]}, i++, j++
+    \Else \text{ } $j++$
+    \EndIf
+  \EndWhile
+  \State \Comment \begin{tabular}{|l|l|l|}
+	  \hline
+	  l & i  & r \\	  \hline
+           \textless p & \textgreater  p & =p \\
+           \hline
+         \end{tabular}
+    \If {$r-k \leq k -i + 1$} \Call{swap}{a[i..i+(r-k)-1],a[k+1..r]}
+    \Else \text{ } \Call{swap}{a[i..k], a[r-(k-i)..r]}
+    \EndIf
+      \State \Comment \begin{tabular}{|l|l|l|}
+	  \hline
+	  l & i  & r \\	  \hline
+           \textless p & =p & \textgreater  p \\
+           \hline
+         \end{tabular}
+ \EndFunction
+\end{algorithmic}
+
+\end{frame}
+
+\subsection{Bucketsort}
+
+
+
+\end{document}
