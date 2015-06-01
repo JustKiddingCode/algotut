@@ -27,8 +27,8 @@
 \epstopdfDeclareGraphicsRule{.gif}{png}{.png}{convert gif:#1 png:\OutputFile}
 \AppendGraphicsExtensions{.gif}
 
- \newcommand{\real}{\mathbb{R}}
- \newcommand{\nat}{\mathbb{N}}
+ \newcommand{\R}{\mathbb{R}}
+ \newcommand{\N}{\mathbb{N}}
  \newcommand{\Oh}{\mathcal{O}}
  \newcommand{\oh}{\mathrm{o}}
  \newcommand{\SP}{\mathrm{SP}}
@@ -61,7 +61,7 @@
 % the presentation starts here
 
 \title[Algo I Tut]{7. Algorithmen Tutorium I}
-\subtitle{Sortieralgorithmen - Intensiv} % TODO
+\subtitle{Übungsklausur - Wiederholen und Üben}
 \author[Zangerle]{Konstantin Zangerle}
 
 \institute{Institut für Theoretische Informatik}
@@ -101,96 +101,162 @@
 \end{frame}
 
 
-\section{Besprechung der Übungsaufgaben}
+\section{Pseudocode}
+\begin{frame}{Matrixmultiplikation}
+ Gegeben seien zwei Matrizen A,B $\in \N^{n \times n}$.
+ Die Struktur ``Matrix'' bietet folgende Funktionen:
+ \begin{itemize}
+  \item M.get(int x, int y): $m_{x,y}$
+  \item M.set(int x, int y, int v) Setzt $m_{x,y}$ auf v
+  \item M.size() : Gibt die Größe (n) der Matrix zurück.
+ \end{itemize}
+Die Operationen können in $\Theta(1)$ ausgeführt werden.
+Geben Sie Pseudocode an, der das Produkt von A und B berechnet 
+und geben Sie die Laufzeit in $\Theta$ an.
+
+\end{frame}
+
+\section{Master Theorem}
+\begin{frame}{Master Theorem}
+
+Bestimmen Sie die Lösungen für $k \in \N$ der folgenden Rekurrenzen in $\Theta$ mit dem Master-Theorem.
+\begin{itemize}
+ \item $T(1) = 1$, $T(n) = 6 T(\frac{n}{3}) + 4n$, $n = 3^k$
+ \item $S(1) = 23$, $S(n) = 1000 + n + 5S(\frac{n}{5})$, $n = 5^k$
+\end{itemize}
+ 
+\end{frame}
+
 
 \section{Sortieralgorithmen}
-\begin{frame}[fragile]{Übersicht Sortieralgorithmen}
+\begin{frame}{Sortieralgorithmen vergleichen}
+ Nennen Sie je einen Vorteil von Radix-Sort gegenüber 
+ Quicksort und von Heapsort gegenüber Quicksort.
+\end{frame}
+
+\begin{frame}
+ Geben Sie je einen Vor- und Nachteil für die Benutzung eines zufälligen Pivots und des Medians als Pivot für Quicksort an.
+\end{frame}
+
+\begin{frame}
+ Nennen Sie ein Beispiel, welchen Nutzen das Dummy-Element in einer doppelt-verketteten Liste hat.
+\end{frame}
+
+\begin{frame}{Selectionsort}
+ Sortieren durch Auswählen (Selection Sort) ist ein weiterer vergleichsbasierter Sortier-Algorithmus. In jedem Schritt sucht er das kleinste Element der Sequenz und verschiebt es an den Anfang. Danach wird der Rest der Sequenz um eins nach rechts verschoben. Gehen Sie im Folgenden von einer Array-Implementierung aus.
+ \begin{enumerate}[label=\alph* )]
+  \item Konstruieren Sie eine Worst-Case-Eingabe für n=5.
+  \item Geben Sie die Laufzeit für eine Sequenz von n Elementen im schlimmsten Fall an.
+  \item Welchem Sortier-Algorithmus ähnelt Selection Sort?
+ \end{enumerate}
+\end{frame}
+
+\begin{frame}{Quicksort}
+Sortieren Sie die Zahlen $<4,2,7,4,8,3,2,4,9>$ mittels Quicksort. 
+Benutzen Sie die Implementierung mit den drei Mengen <p, =p, >p. (Quick3) 
+Stellen Sie die Rekursion als Baum dar. Der Pivot eines 
+(Teil-)Arrays der Länge n ist das –te Element. (Indizes starten bei 0)
+\end{frame}
+
+
+\section{Listen und Felder}
+\begin{frame}{Listen und Felder (1)}
+ Welche der folgenden Operationen eines unbeschränkten Feldes 
+ liegen im schlimmsten Fall in $\Theta(n)$
  \begin{itemize}
-  \item Mergesort
-  \item Insertionsort
-  \item Selectionsort
-  \item Quicksort
-  \item Heapsort
-  \item \verb|http://www.sorting-algorithms.com/|
+  \item popBack
+  \item Folge von n pushBack
+  \item Elemenzugriff
+  \item Größe
  \end{itemize}
-
 \end{frame}
 
-\subsection{Mergesort}
-\begin{frame}[fragile]{Mergesort}
-\begin{algorithmic}
- \Function{mergeSort}{a[1..n]}
-   \If{$n=1$} \Return {a[1]} 
-    \Else
-      \State \Return merge(
-      \Call{mergeSort}{a[$1..\lfloor n/2 \rfloor$]},
-      \Call{mergeSort}{a[$\lfloor n/2 \rfloor$+1..n]}
-      )
-   \EndIf
-  
-   
- \EndFunction
-\end{algorithmic}
-
+\begin{frame}{Listen und Felder (2)}
+ Nennen Sie zwei Vorteile von beschränkten 
+ Feldern gegenüber einfach verketteten Listen.
 \end{frame}
 
-\subsection{Insertionsort}
-\begin{frame}{Insertionsort}
+\begin{frame}{Listen und Felder (3)}
+ Wie lautet die Datenstrukturinvariante für doppelt verkettete Listen aus der Vorlesung?
 \end{frame}
 
-\subsection{Quicksort}
-\begin{frame}[fragile]{Quicksort - qSortTernary}
-\begin{algorithmic}
- \Procedure{qSortTernary}{a : Array of Element; l, r : $\mathbb{N}$}
-  \If{$l \leq r$} \Return \EndIf
-  \State $p \gets $ \Call{key}{a[pickPivotPos(a, l,r)]}
-  \State $(m,m') \gets $ \Call{partitionTernary}{a,l,r,p}
-  \State \Call{qSortTernary}{a,l,m-1}
-  \State \Call{qSortTernary}{a,m'+1, r}
- \EndProcedure
-\end{algorithmic}
-
+\section{Hashing}
+\begin{frame}
+ Gegeben sei eine Hashtabelle mit 6 Einträgen und Puffergröße 3, 
+ sowie die Hashfunktion
+$$h(x) = ((x \text{ DIV } 10) + 3) \text{ MOD } 6. $$
+Fügen Sie die Elemente 17, 53, 140, 73, 6, 111 ein.
+Verwenden Sie Hashing mit linearer Suche. 
+(Indizes der Hashtabelle beginnen bei 0)
 \end{frame}
 
-\begin{frame}[fragile]{Quicksort - partitionTernary}
-\small
-\begin{algorithmic}
- \Function{partitionTernary}{a : Array of Element; l, r : $\mathbb{N}$, p : Key}
-  \State $i \gets l$, $j \gets l$, $k \gets r$
-  \State \Comment \begin{tabular}{|l|l|l|l|}
-	  \hline
-	  l & i & j & r \\	  \hline
-           \textless p & \textgreater  p & ? & =p \\
-           \hline
-         \end{tabular}
-  \While{$j \leq k$}
-    \If{a[j] = p} \Call{swap}{a[j],a[k]}, $k--$
-    \ElsIf{a[j] \textless p} \Call{swap}{a[j],a[i]}, i++, j++
-    \Else \text{ } $j++$
-    \EndIf
-  \EndWhile
-  \State \Comment \begin{tabular}{|l|l|l|}
-	  \hline
-	  l & i  & r \\	  \hline
-           \textless p & \textgreater  p & =p \\
-           \hline
-         \end{tabular}
-    \If {$r-k \leq k -i + 1$} \Call{swap}{a[i..i+(r-k)-1],a[k+1..r]}
-    \Else \text{ } \Call{swap}{a[i..k], a[r-(k-i)..r]}
-    \EndIf
-      \State \Comment \begin{tabular}{|l|l|l|}
-	  \hline
-	  l & i  & r \\	  \hline
-           \textless p & =p & \textgreater  p \\
-           \hline
-         \end{tabular}
- \EndFunction
-\end{algorithmic}
-
+\begin{frame}
+ Nennen Sie einen Vorteil und einen Nachteil von 
+ Hashing mit verketteten Listen gegenüber Hashing mit linearer Suche.
 \end{frame}
 
-\subsection{Bucketsort}
+\section{Sonstiges}
+\begin{frame}{Binärer Heap}
+ Ein Array $[1..h]$ stelle einen impliziten binären Heap dar. 
+ Geben Sie sowohl den Index des Parents als auch des rechten 
+ Kindes für das Element j an, gegeben dass beide existieren.
+\end{frame}
 
+\begin{frame}{Binärer Heap (2)}
+ Gegeben sei folgende Darstellung eines binären Heaps 
+ als Array mit den Indizes 1..8:
+[3,12,9,13,13,12,13,42]. 
+
+Geben Sie den Inhalt des Arrays an (ohne entferntes Element), nachdem 
+deleteMin ausgeführt worden ist.
+\end{frame}
+
+
+\begin{frame}{O-Kalkül}
+ Gegeben seien zwei Funktionen f und g.
+ Zeigen Sie $g = \Oh(f) \iff f = \Omega(g)$
+\end{frame}
+
+\begin{frame}{O-Kalkül(2)}
+ Vergeichen Sie das asymptotische Laufzeitverhalten von f und g.
+ 
+ $f(n) = k^n, g(n) = (k+1)^n$
+ für $k \in \N^+$
+\end{frame}
+
+
+\begin{frame}{Erwartungswert}
+Gegeben sei ein Würfel, auf dem eine 1, zweimal die 2 und dreimal die 3 
+abgebildet ist. Das würfeln jeder Seite sei gleich wahrscheinlich. 
+Geben Sie den Erwartungswert der Summe X der gewürfelten Zahlen 
+nach 4 Würfen an.
+\end{frame}
+
+\begin{frame}{Doktor Meta}
+ Der geniale und ebenso vergessliche Superbösewicht Doktor Meta 
+ möchte seinen Vornamen vor der Welt geheim halten, tendiert 
+ jedoch dazu, ihn hin und wieder selbst zu vergessen. Aus diesem 
+ Grund hat er sich ein Verschlüsselungsverfahren überlegt, dass 
+ seinen Vornamen auf ein Geheimwort abbildet und das Geheimwort 
+ auf die Unterseite seines Kopfkissens geschrieben. Das 
+ Verschlüsselungsverfahren arbeitet wie folgt:
+ 
+\end{frame}
+
+\begin{frame}[fragile]{Doktor Meta (Fort.)}
+  \begin{algorithmic}
+  \Function{hideMyName}{Arr[1..n] Character} : Arr[1..n] Character
+    \For{i=1 to n}
+      \State \Comment{ convertToChar: a $\rightarrow$ 0, b $\rightarrow$ 1, $\dots$ z $\rightarrow$ 25}
+      \State Arr[i] $\gets$ convertToChar(convertToInt(Arr[i] + 3) mod 26)
+    \EndFor
+    \Call{ShiftToRight}{Arr, 3}
+    \State \Return Arr
+  \EndFunction
+ \end{algorithmic}
+ 
+ Das Geheimwort lautet: ``WRUGRN''. Wie lautet der Vorname von Doktor Meta?
+\end{frame}
 
 
 \end{document}
