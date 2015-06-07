@@ -1,0 +1,138 @@
+%% LaTeX-Beamer template for KIT design
+%% by Erik Burger, Christian Hammer
+%% title picture by Klaus Krogmann
+%%
+%% version 2.1
+%%
+%% mostly compatible to KIT corporate design v2.0
+%% http://intranet.kit.edu/gestaltungsrichtlinien.php
+%%
+%% Problems, bugs and comments to
+%% burger@kit.edu
+
+\documentclass[18pt]{beamer}
+%% SLIDE FORMAT
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+% use 'beamerthemekit' for standard 4:3 ratio
+% for widescreen slides (16:9), use 'beamerthemekitwide'
+
+%\usepackage{templates/beamerthemekit}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage[noend]{algpseudocode}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+
+\epstopdfDeclareGraphicsRule{.gif}{png}{.png}{convert gif:#1 png:\OutputFile}
+\AppendGraphicsExtensions{.gif}
+
+ \newcommand{\R}{\mathbb{R}}
+ \newcommand{\N}{\mathbb{N}}
+ \newcommand{\Oh}{\mathcal{O}}
+ \newcommand{\oh}{\mathrm{o}}
+ \newcommand{\SP}{\mathrm{SP}}
+
+% \usepackage{templates/beamerthemekitwide}
+
+%\usepackage{epigraph}
+
+% for quotes
+
+\AtBeginSection[] % Do nothing for \section*
+{
+\begin{frame}<beamer>
+\frametitle{Gliederung}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+
+\usepackage{biolinum}
+
+\usepackage{pgfplots}
+
+%% TikZ INTEGRATION
+
+% use these packages for PCM symbols and UML classes
+% \usepackage{templates/tikzkit}
+% \usepackage{templates/tikzuml}
+
+% the presentation starts here
+
+\title[Algo I Tut]{7. Algorithmen Tutorium I}
+\subtitle{Übungsklausur - Wiederholen und Üben}
+\author[Zangerle]{Konstantin Zangerle}
+
+\institute{Institut für Theoretische Informatik}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+}
+
+% Bibliography
+
+\begin{document}
+% change the following line to "ngerman" for German style date and logos
+%\selectlanguage{ngerman}
+
+%title page
+\begin{frame}
+\titlepage
+\end{frame}
+
+%table of contents
+\begin{frame}{Gliederung}
+ \tableofcontents
+\end{frame}
+
+\section{Binärer Heap}
+\begin{frame}[fragile]{Binärer Heap}
+
+\hspace{13em}
+\includegraphics[scale=0.4]{Binary_heap_indexing}
+ \begin{block}{Definition}
+  Ein Binärbaum H ist ein Min-Heap, wenn für jeden Knoten $i$ mit $i \neq \text{root}$ gilt:
+  $$\text{key}(H,i) \geq \text{key}(H,\text{parent}(i)$$
+  und jede Schicht, bis auf die letzte, ausgefüllt ist.
+  Wobei \verb|parent(i)| den Elterknoten von $i$ zurückgibt.
+ \end{block}
+
+\end{frame}
+
+\begin{frame}{Binary Heap -- Aufgabe}
+Geben sie jeden möglichen Max Heap zu den Zahlen 1,4,3,9,6 an.
+\end{frame}
+
+\begin{frame}{Bulk Insertion bei binären Heaps}
+Gegeben sei ein binärer Heap, der n Elemente enhält. Es sollen nun k Elemente auf einmal
+eingefügt werden. Geben Sie ein Verfahren an (kein Pseudocode), mit dem man das Einfügen in $\Oh(\min\{k \log k + \log n, k + \log n \log k \})$ Schritten erledigen kann.
+Sie können davon ausgehen, dass der Heap genau $2m - 1$ enthält ($m \in \N$).
+\end{frame}
+
+\begin{frame}{Pancake-Sorting}
+ Gegeben sind n Pancakes in unterschiedlicher Größe und gestapelt. Man hat einen Pancakeflipper zur Verfügung mit dem man
+ die obersten l Pancakes umdrehen kann.
+ Entwickelt einen schnellen Algorithmus, um die Pancakes umzudrehen.
+\end{frame}
+
+\begin{frame}{Spaghetti Sort}
+ 
+\end{frame}
+
+
+\end{document}
