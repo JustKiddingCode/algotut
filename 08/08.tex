@@ -60,8 +60,8 @@
 
 % the presentation starts here
 
-\title[Algo I Tut]{7. Algorithmen Tutorium I}
-\subtitle{Übungsklausur - Wiederholen und Üben}
+\title[Algo I Tut]{8. Algorithmen Tutorium I}
+\subtitle{Ein paar schöne Bäume}
 \author[Zangerle]{Konstantin Zangerle}
 
 \institute{Institut für Theoretische Informatik}
@@ -124,15 +124,73 @@ eingefügt werden. Geben Sie ein Verfahren an (kein Pseudocode), mit dem man das
 Sie können davon ausgehen, dass der Heap genau $2m - 1$ enthält ($m \in \N$).
 \end{frame}
 
+\begin{frame}{Bulk Insertion bei binären Heaps -- Lösung}
+\includegraphics[scale=0.7]{bulkheap}
+\begin{itemize}
+ \item Falls $k \in \Omega(n)$:
+ \begin{itemize}
+  \item Rufe auf $k+n$ Elementen die Funktion buildHeap auf.
+  \item Laufzeit $\Oh(k)$
+ \end{itemize}
+  \item k wesentlich kleiner als n:
+  \begin{itemize}
+   \item Verletze Heap-Eigenschaft: Hänge an den Heap an.
+   \item Def x letzter Knoten der gemeinsamen Knoten aus k
+   \item Für y = par(x): N ist von 1 bis y sortiert.
+   \item $\bar{k}$ kleinste Zweierpotenz mit $k \leq \bar{k}$
+   \item an T $\bar{k} - 1 < 2k \in \Oh(k)$
+   \item es gibt $\lceil \log n \rceil - \lceil \log k \rceil + 1 \in \Oh(\log n)$ gemeinsame Vorgänger von K.
+  \end{itemize}
+
+\end{itemize}
+
+  
+ Sei K die Menge der einzufügenden Elemente. Man kann nun einfach die Elemente aus K hinten
+ 
+\end{frame}
+
+\begin{frame}{Bulk Insertion bei binären Heaps -- Lösung (2)}
+\includegraphics[scale=0.5]{bulkheap}
+Für $k \leq \log n$
+\begin{itemize}
+ \item Muss in $\Oh(k \log k + \log n)$ liegen
+ \item Finde x in $\Oh(\log n)$
+ \item Schneide T aus Heap aus und sortiere $K \cup T$ in $\Oh(k \log k)$.
+ \item Schneide N aus Heap aus. Merge N und $K \cup T$ in $\Oh(k + \log n)$.
+ \item Füge nacheinander die kleinsten Elemente von $N \cup K \cup T$ in den 
+ Heap ein. Beginne bei ursprünglichen Stelle von 1, fahre fort bis zur ursprünglichen Stelle von y.
+ Füge die sortierten Elemente in den Teilheap ab der ursprünglichen Stelle von x ein.
+ 
+ \item $\Oh(k + \log n)$
+ 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+ $k > \log n$
+ \begin{itemize}
+  \item $\Oh(k + \log n \log k)$
+  \item Finde x in
+  \item Schneide T aus, führe $K \cup T$ in $\Oh(k)$ Schritten buildHeap.
+  \item Der Heap hat eine Größe $\Oh(k)$.
+  \item Entnehme die N kleinsten Elemente aus dem Heap von $K \cup T$.
+  \item Benötigt $\Oh(\log n \log k)$
+  \item Schneide N aus dem Heap aus. Erhalte Sortierung in N.
+  \item Merge N und M. $\Oh(\log n)$.
+ \item Füge nacheinander die kleinsten Elemente von $N \cup K \cup M$ in den 
+ großen Heap ein. Beginne bei ursprünglichen Stelle von 1, fahre fort bis zur ursprünglichen Stelle von y.
+ \item Füge die sortierten Elemente in den Teilheap ab der ursprünglichen Stelle von x ein.
+ \item Füge die restlichen Elemente per Standardfunktion ein.
+ \item Verbinde $K \cup T$ und den gr. Heap. Konstante Zeit.
+ \end{itemize}
+$\Oh(k + \log n \log k)$
+\end{frame}
+
+
 \begin{frame}{Pancake-Sorting}
  Gegeben sind n Pancakes in unterschiedlicher Größe und gestapelt. Man hat einen Pancakeflipper zur Verfügung mit dem man
  die obersten l Pancakes umdrehen kann.
  Entwickelt einen schnellen Algorithmus, um die Pancakes umzudrehen.
 \end{frame}
-
-\begin{frame}{Spaghetti Sort}
- 
-\end{frame}
-
 
 \end{document}
