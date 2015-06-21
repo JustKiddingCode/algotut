@@ -1,0 +1,8 @@
+digraph bla{
+A -> B [label="1"];
+B -> C [label="2"];
+C -> D [label="3"];
+D -> A [label="4"];
+E -> B [label="5"];
+B -> E [label="ente"];
+}
